@@ -1,0 +1,33 @@
+package Chat;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import javax.swing.JFrame;
+
+public class Ventana extends JFrame {
+	  public Ventana(int ancho, int alto) {
+	    setSize(ancho, alto);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	    // Creamos los paneles que queremos agregar
+	    Cuadricula cuadricula = new Cuadricula();
+	    Colors colors = new Colors();
+
+	    // Agregamos los paneles a la ventana utilizando BorderLayout
+	    setLayout(new BorderLayout());
+	    add(cuadricula, BorderLayout.NORTH);
+	 
+
+	    setVisible(true);
+	  }
+	
+
+    public static void main(String[] args) {
+        // Crear la ventana principal
+        Ventana ventana = new Ventana(1500, 1000);
+
+        // Mostrar la ventana
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
+    }
+}

@@ -1,0 +1,35 @@
+package Chat;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
+public class Cuadricula extends JPanel {
+  private static final int TAMANO_CUADRICULA = 10;
+  Colors colors = new Colors();
+  
+  public Cuadricula() {
+    setPreferredSize(new Dimension(500, 500));
+    
+  }
+
+  @Override
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    // Obtener el ancho y alto de este panel
+    int width = getWidth();
+    int height = getHeight();
+    // Dibujar la cuadrícula
+    g.setColor(Color.LIGHT_GRAY);
+    for (int x = 0; x < width; x += TAMANO_CUADRICULA) {
+      for (int y = 0; y < height; y += TAMANO_CUADRICULA) {
+        g.drawRect(x, y, TAMANO_CUADRICULA, TAMANO_CUADRICULA);
+      }
+    }
+    
+    setLayout(new BorderLayout());
+    
+    add(colors, BorderLayout.WEST);
+  }
+}

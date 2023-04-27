@@ -1,0 +1,112 @@
+package Chat;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Colors extends JPanel {
+
+  private JSlider redSlider, greenSlider, blueSlider;
+  private JPanel colorPanel;
+  private JLabel colorLabel;
+
+  public Colors() {
+
+	    setLayout(null);
+
+	    // create sliders
+	    redSlider = new JSlider(0, 255);
+	    greenSlider = new JSlider(0, 255);
+	    blueSlider = new JSlider(0, 255);
+
+	    // create color panel and label
+	    colorPanel = new JPanel();
+	    colorPanel.setBackground(new Color(0, 0, 0));
+	    colorPanel.setBounds(1250,30,200,200);
+	    colorLabel = new JLabel("Color: (0,0,0)");
+	    colorLabel.setBounds(1300,100,300,300);
+
+	    // add sliders, color panel, and label to the frame
+	    add(redSlider);
+	    add(greenSlider);
+	    add(blueSlider);
+	    add(colorPanel);
+	    add(colorLabel);
+
+	    // add change listeners to the sliders and set bounds
+	    redSlider.setBounds(900, 40, 300, 35);
+	    redSlider.addChangeListener(new SliderChangeListener());
+
+	    greenSlider.setBounds(900, 100, 300, 35);
+	    greenSlider.addChangeListener(new SliderChangeListener());
+
+	    blueSlider.setBounds(900, 160, 300, 35);
+	    blueSlider.addChangeListener(new SliderChangeListener());
+
+	    // create color buttons
+	    JButton redButton = new JButton();
+	    redButton.setBackground(Color.RED);
+	    redButton.addActionListener(new ColorButtonListener(Color.RED));
+	    redButton.setBounds(200, 50, 80, 30);
+
+	    JButton greenButton = new JButton();
+	    greenButton.setBackground(Color.GREEN);
+	    greenButton.addActionListener(new ColorButtonListener(Color.GREEN));
+	    greenButton.setBounds(300, 50, 80, 30);
+
+	    JButton blueButton = new JButton();
+	    blueButton.setBackground(Color.BLUE);
+	    blueButton.addActionListener(new ColorButtonListener(Color.BLUE));
+	    blueButton.setBounds(400, 50, 80, 30);
+
+	    // add buttons to the frame
+	    add(redButton);
+	    add(greenButton);
+	    add(blueButton);
+
+	    // set size and show the frame
+	    setSize(1500, 300);
+	    setVisible(true);
+	}
+
+  // color button listener
+  class ColorButtonListener implements ActionListener {
+    private Color color;
+
+    public ColorButtonListener(Color color) {
+      this.color = color;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+      // set slider values to match the selected color
+      redSlider.setValue(color.getRed());
+      greenSlider.setValue(color.getGreen());
+      blueSlider.setValue(color.getBlue());
+      // update color panel and label
+      colorPanel.setBackground(color);
+      colorLabel.setText("Color: (" + color.getRed() + "," + color.getGreen() + "," + color.getBlue() + ")");
+    }
+  }
+
+  // change listener for sliders
+  class SliderChangeListener implements ChangeListener {
+    public void stateChanged(ChangeEvent e) {
+      // get values of the sliders
+      int r = redSlider.getValue();
+      int g = greenSlider.getValue();
+      int b = blueSlider.getValue();
+
+      // update color panel and label
+      colorPanel.setBackground(new Color(r, g, b));
+      colorLabel.setText("Color: (" + r + "," + g + "," + b + ")");
+    }
+  }
+}
